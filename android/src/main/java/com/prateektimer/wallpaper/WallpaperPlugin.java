@@ -89,6 +89,10 @@ public class WallpaperPlugin extends FlutterActivity implements FlutterPlugin, M
                 break;
             case "SystemWallpaper":
                 location = call.argument("location");
+                maxWidth = call.argument("maxWidth");
+                maxHeight = call.argument("maxHeight");
+                options = call.argument("RequestSizeOptions");
+                imageName = call.argument("imageName");
                 result.success(setSystemWallpaper());
                 break;
             default:
