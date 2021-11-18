@@ -112,12 +112,14 @@ public class WallpaperPlugin extends FlutterActivity implements FlutterPlugin, M
             File file = GetFile(location, context, imageName);
             Uri contentURI = getImageContentUri(this, file);
             Intent intent = new Intent(wallpaperManager.getCropAndSetWallpaperIntent(contentURI));
+            intent.addCategory("android.intent.category.DEFAULT");
             String mime = "image/*";
+            intent.putExtra("mimeType", mime);
             if (intent != null) {
                 intent.setDataAndType(contentURI, mime);
             }
             try {
-                startActivityForResult(intent, 2);
+                startActivityForResult(Intent.createChooser(intent, "Set As:"), 2);
             } catch (ActivityNotFoundException e) {
                 //handle error
                 result = e.toString();
